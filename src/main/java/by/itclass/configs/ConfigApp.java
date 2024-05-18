@@ -23,7 +23,7 @@ public class ConfigApp {
     @Bean
     public Configuration configuration() {
         var config = new Configuration();
-        config.addPackage("by.itclass.model.entities");
+        config.addAnnotatedClass(User.class);
         return config;
     }
 

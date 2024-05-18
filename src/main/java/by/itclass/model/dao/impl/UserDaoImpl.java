@@ -24,4 +24,32 @@ public class UserDaoImpl implements UserDao {
             return session.createQuery("from User", User.class).list();
         }
     }
+
+    @Override
+    public void removeById(int id) {
+        try (var session = sessionFactory.openSession()) {
+            var transaction = session.beginTransaction();
+            var user = session.get(User.class, id);
+            session.delete(user);
+            transaction.commit();
+        }
+    }
+
+    @Override
+    public void insertUser(User user) {
+        try (var session = sessionFactory.openSession()) {
+            var transaction = session.beginTransaction();
+            session.persist(user);
+            transaction.commit();
+        }
+    }
+
+    @Override
+    public void update(User user) {
+        try (var session = sessionFactory.openSession()) {
+            var transaction = session.beginTransaction();
+            session.update(user);
+            transaction.commit();
+        }
+    }
 }
