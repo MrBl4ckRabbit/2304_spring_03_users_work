@@ -68,9 +68,19 @@ public class UserController {
             @RequestParam(name = "age") int age) {
         return new ModelAndView("update", USER_ATTR, new User(id, name, age));
     }
-@PostMapping("/saveUpdate")
+
+    @PostMapping("/saveUpdate")
     public String saveUpd(@ModelAttribute(name = "user") User user) {
         service.update(user);
+        return "redirect:" + ALL_USERS_URL;
+    }
+
+    @PostMapping("/updateSecond")
+    public String updateSecond(
+            @RequestParam(name = "id") int id,
+            @RequestParam(name = "name") String name,
+            @RequestParam(name = "age") int age) {
+        service.update(new User(id, name, age));
         return "redirect:" + ALL_USERS_URL;
     }
 }
